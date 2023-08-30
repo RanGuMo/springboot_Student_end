@@ -5,6 +5,7 @@ public class Params {
     private String name;
     private String phone;
     private String author;
+    private Integer userId;
     private Integer pageNum;
     private Integer pageSize;
 
@@ -46,5 +47,13 @@ public class Params {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }
