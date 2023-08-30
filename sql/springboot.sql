@@ -11,7 +11,7 @@
  Target Server Version : 80018
  File Encoding         : 65001
 
- Date: 27/08/2023 21:30:12
+ Date: 30/08/2023 23:32:49
 */
 
 SET NAMES utf8mb4;
@@ -30,7 +30,7 @@ CREATE TABLE `admin`  (
   `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '电话',
   `role` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '角色',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '用户信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '用户信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of admin
@@ -44,6 +44,26 @@ INSERT INTO `admin` VALUES (7, '李四', '123456', '男', 18, '12346111111111', 
 INSERT INTO `admin` VALUES (9, '张三三1', '111', '男', 144, '沙发上', 'ROLE_STUDENT');
 INSERT INTO `admin` VALUES (10, '王五', '123456', '男', 19, '13111111111111', 'ROLE_STUDENT');
 INSERT INTO `admin` VALUES (11, '赵六', '123456', NULL, NULL, NULL, 'ROLE_STUDENT');
+
+-- ----------------------------
+-- Table structure for audit
+-- ----------------------------
+DROP TABLE IF EXISTS `audit`;
+CREATE TABLE `audit`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '请假原由',
+  `time` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '请假日期',
+  `day` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '请假天数',
+  `userId` int(11) NULL DEFAULT NULL COMMENT '请假用户ID',
+  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '审核状态',
+  `reason` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '审核意见',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '请假审核表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of audit
+-- ----------------------------
+INSERT INTO `audit` VALUES (1, '回家相亲', '2023-08-31', '7', 6, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for book
@@ -79,7 +99,7 @@ CREATE TABLE `type`  (
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '分类名称',
   `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '分类介绍',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '图书分类表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '图书分类表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of type
