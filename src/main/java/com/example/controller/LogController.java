@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.common.AutoLog;
 import com.example.common.Result;
 import com.example.entity.Log;
 import com.example.entity.Params;
@@ -34,6 +35,7 @@ public class LogController {
 
     // 删除
     @DeleteMapping("/{id}")
+    @AutoLog("日志管理的删除")
     public Result delete(@PathVariable Integer id) {
         logService.delete(id);
         return Result.success();

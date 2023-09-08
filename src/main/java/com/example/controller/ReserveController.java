@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import cn.hutool.core.date.DateUtil;
+import com.example.common.AutoLog;
 import com.example.common.Result;
 import com.example.dao.HotelDao;
 import com.example.entity.Hotel;
@@ -30,6 +31,7 @@ public class ReserveController {
     }
 
     @PostMapping
+    @AutoLog("酒店预约")
     public Result save(@RequestBody Reserve reserve) {
         // 1. 酒店剩余房间是否为0，大于0的时候，才可以被预定
         Hotel hotel = hotelDao.selectByPrimaryKey(reserve.getHotelId());
@@ -49,6 +51,7 @@ public class ReserveController {
     }
 
     @DeleteMapping("/{id}")
+    @AutoLog("酒店预约的删除")
     public Result delete(@PathVariable Integer id) {
         reserveService.delete(id);
         return Result.success();

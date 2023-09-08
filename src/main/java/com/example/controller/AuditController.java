@@ -1,6 +1,7 @@
 package com.example.controller;
 
 
+import com.example.common.AutoLog;
 import com.example.common.Result;
 import com.example.entity.Audit;
 import com.example.entity.Params;
@@ -28,6 +29,7 @@ public class AuditController {
 
     //新增和编辑
     @PostMapping
+    @AutoLog("新增或编辑的审核")
     public Result save(@RequestBody Audit audit) {
         if (audit.getId() == null) { //没有id 就是新增
             auditService.add(audit);
@@ -39,6 +41,7 @@ public class AuditController {
 
     //删除
     @DeleteMapping("/{id}")
+    @AutoLog("审核删除")
     public Result delete(@PathVariable Integer id) {
         auditService.delete(id);
         return Result.success();

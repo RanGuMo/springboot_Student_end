@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.common.AutoLog;
 import com.example.common.Result;
 import com.example.entity.Hotel;
 import com.example.entity.Params;
@@ -25,6 +26,7 @@ public class HotelController {
     }
 
     @PostMapping
+    @AutoLog("新增或编辑的酒店管理")
     public Result save(@RequestBody Hotel hotel) {
         if (hotel.getId() == null) {
             hotelService.add(hotel);
@@ -35,6 +37,7 @@ public class HotelController {
     }
 
     @DeleteMapping("/{id}")
+    @AutoLog("根据id删除酒店管理")
     public Result delete(@PathVariable Integer id) {
         hotelService.delete(id);
         return Result.success();

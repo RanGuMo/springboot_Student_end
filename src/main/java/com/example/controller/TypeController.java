@@ -5,6 +5,7 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
+import com.example.common.AutoLog;
 import com.example.common.Result;
 import com.example.entity.Params;
 import com.example.entity.Type;
@@ -46,6 +47,7 @@ public class TypeController {
 
     //新增和编辑
     @PostMapping
+    @AutoLog("分类管理的新增或编辑")
     public Result save(@RequestBody Type type) {
         if (type.getId() == null) { //没有id 就是新增
             typeService.add(type);
@@ -57,6 +59,7 @@ public class TypeController {
 
     //删除
     @DeleteMapping("/{id}")
+    @AutoLog("分类管理的删除")
     public Result delete(@PathVariable Integer id) {
         typeService.delete(id);
         return Result.success();
@@ -64,6 +67,7 @@ public class TypeController {
 
     //批量删除
     @PutMapping("/delBatch")
+    @AutoLog("分类管理的批量删除")
     public Result delBatch(@RequestBody List<Type> list) {
         for (Type type : list) {
             typeService.delete(type.getId());
@@ -73,6 +77,7 @@ public class TypeController {
 
     // 导出Excel
     @GetMapping("/export")
+    @AutoLog("分类管理的导出Excel")
     public Result export(HttpServletResponse response) throws IOException {
         // 思考：
         // 要一行一行的组装数据，塞到一个list里面
@@ -116,6 +121,7 @@ public class TypeController {
     }
 
     @PostMapping("/upload")
+    @AutoLog("分类管理的导入")
     public Result upload(MultipartFile file) throws IOException {
         List<Type> infoList = ExcelUtil.getReader(file.getInputStream()).readAll(Type.class);
         if (!CollectionUtil.isEmpty(infoList)) {

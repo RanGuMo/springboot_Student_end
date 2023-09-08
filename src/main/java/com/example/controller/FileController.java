@@ -2,6 +2,7 @@ package com.example.controller;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.StrUtil;
+import com.example.common.AutoLog;
 import com.example.common.Result;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,6 +26,7 @@ public class FileController {
      * 文件上传
      */
     @PostMapping("/upload")
+    @AutoLog("文件上传")
     public Result upload(MultipartFile file) {
         synchronized (FileController.class) {
             String flag = System.currentTimeMillis() + "";
