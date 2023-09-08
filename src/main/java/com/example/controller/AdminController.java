@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.common.AutoLog;
 import com.example.common.Result;
 import com.example.entity.Admin;
 import com.example.entity.Params;
@@ -20,7 +21,8 @@ public class AdminController {
 
     //    登录
     @PostMapping("/login")
-    private Result login(@RequestBody Admin admin) {
+    @AutoLog("登录该系统")
+    public Result login(@RequestBody Admin admin) {
         Admin loginUser = adminService.login(admin);
         return Result.success(loginUser);
     }

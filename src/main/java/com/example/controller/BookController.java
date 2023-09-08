@@ -1,6 +1,7 @@
 package com.example.controller;
 
 
+import com.example.common.AutoLog;
 import com.example.common.Result;
 import com.example.entity.Admin;
 import com.example.entity.Book;
@@ -29,6 +30,7 @@ public class BookController {
 
     //新增和编辑
     @PostMapping
+    @AutoLog("新增或编辑图书信息")
     public Result save(@RequestBody Book book) {
         if (book.getId() == null) { //没有id 就是新增
             bookService.add(book);
@@ -40,6 +42,7 @@ public class BookController {
 
     //删除
     @DeleteMapping("/{id}")
+    @AutoLog("删除图书信息")
     public Result delete(@PathVariable Integer id) {
         bookService.delete(id);
         return Result.success();
