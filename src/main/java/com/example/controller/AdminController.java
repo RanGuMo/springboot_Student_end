@@ -1,14 +1,17 @@
 package com.example.controller;
 
 import com.example.common.AutoLog;
+import com.example.common.CaptureConfig;
 import com.example.common.Result;
 import com.example.entity.Admin;
 import com.example.entity.Params;
 import com.example.service.AdminService;
+import com.wf.captcha.utils.CaptchaUtil;
 import org.springframework.web.bind.annotation.*;
 import com.github.pagehelper.PageInfo;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @CrossOrigin //后端允许跨域
@@ -22,8 +25,15 @@ public class AdminController {
     //    登录
     @PostMapping("/login")
     @AutoLog("登录该系统")
-    public Result login(@RequestBody Admin admin) {
+    public Result login(@RequestBody Admin admin, @RequestParam String key, HttpServletRequest request) {
+        // 判断验证码对不对
+        if (!admin.getVerCode().toLowerCase().equals(CaptureConfig.CAPTURE_MAP.get(key))) {
+            // 如果不相等，说明验证不通过
+            CaptchaUtil.clear(request);
+            return Result.error("验证码不正确");
+        }
         Admin loginUser = adminService.login(admin);
+        CaptureConfig.CAPTURE_MAP.remove(key); //删除map中的数据
         return Result.success(loginUser);
     }
 

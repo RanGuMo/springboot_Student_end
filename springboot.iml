@@ -115,5 +115,6 @@
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-aop:2.7.14" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-aop:5.3.29" level="project" />
     <orderEntry type="library" name="Maven: org.aspectj:aspectjweaver:1.9.7" level="project" />
+    <orderEntry type="library" name="Maven: com.github.whvcse:easy-captcha:1.6.2" level="project" />
   </component>
 </module>

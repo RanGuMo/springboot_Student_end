@@ -24,6 +24,7 @@ public class WebConfig implements  WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(jwtInterceptor).addPathPatterns("/api/**")
                 .excludePathPatterns("/api/files/**")
+                .excludePathPatterns("/api/captcha") //验证码接口放行
                 .excludePathPatterns("/api/type/upload")
                 .excludePathPatterns("/api/admin/login")
                 .excludePathPatterns("/api/admin/register");

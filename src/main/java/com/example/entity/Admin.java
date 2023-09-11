@@ -22,6 +22,9 @@ public class Admin {
     @Column(name = "role")
     private String role;
 
+    @Transient
+    private String verCode;
+
     @Transient //表示不属于表的字段
     private String token;
 
@@ -87,5 +90,13 @@ public class Admin {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getVerCode() {
+        return verCode;
+    }
+
+    public void setVerCode(String verCode) {
+        this.verCode = verCode;
     }
 }
