@@ -18,4 +18,7 @@ public interface BookDao extends Mapper<Book> {
     @Select("select * from book where name = #{name} limit 1")
     Book findByName(@Param("name") String name);
 
+    @Select("select a.*,b.name as typeName from book a left join type b on a.typeId = b.id")
+    List<Book> findAll();
+
 }

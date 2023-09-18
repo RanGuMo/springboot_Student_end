@@ -68,4 +68,8 @@ public class BookService {
     public void delete(Integer id) {
         bookDao.deleteByPrimaryKey(id);
     }
+
+    public List<Book> finAll() {
+       return bookDao.findAll();
+    }
 }
