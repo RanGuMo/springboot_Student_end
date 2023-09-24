@@ -22,6 +22,9 @@ public class Book {
     @Column(name = "typeId")
     private Integer typeId;
 
+    @Column(name = "content")
+    private String content;
+
     @Transient
     private String typeName;
 
@@ -87,5 +90,13 @@ public class Book {
 
     public void setTypeName(String typeName) {
         this.typeName = typeName;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

@@ -1,6 +1,8 @@
 package com.example.controller;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.lang.Dict;
 import cn.hutool.core.util.StrUtil;
 import com.example.common.AutoLog;
 import com.example.common.Result;
@@ -10,10 +12,12 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 import java.io.OutputStream;
 import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
- *  文件上传接口
+ * 文件上传接口
  */
 @RestController
 @RequestMapping("/files")
@@ -71,6 +75,34 @@ public class FileController {
         } catch (Exception e) {
             System.out.println("文件下载失败");
         }
+    }
+
+
+    /**
+     * wang-editor编辑器文件上传接口
+     */
+    @PostMapping("/wang/upload")
+    public Map<String, Object> wangEditorUpload(MultipartFile file) {
+        String flag = System.currentTimeMillis() + "";
+        String fileName = file.getOriginalFilename();
+        try {
+            // 文件存储形式：时间戳-文件名
+            FileUtil.writeBytes(file.getBytes(), filePath + flag + "-" + fileName);
+            System.out.println(fileName + "--上传成功");
+            Thread.sleep(1L);
+        } catch (Exception e) {
+            System.err.println(fileName + "--文件上传失败");
+        }
+        Map<String, Object> resMap = new HashMap<>();
+        // wangEditor上传图片成功后， 需要返回的参数
+        resMap.put("errno", 0);
+        resMap.put("data", CollUtil.newArrayList(Dict.create()
+                .set("url", "http://localhost:9528/api/files/" + flag)
+                .set("href", "http://localhost:9528/api/files/" + flag)
+                .set("alt", "图片描述" + flag)
+
+        ));
+        return resMap;
     }
 
 }
