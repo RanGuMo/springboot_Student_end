@@ -7,6 +7,8 @@ import com.example.entity.Admin;
 import com.example.entity.Params;
 import com.example.service.AdminService;
 import com.wf.captcha.utils.CaptchaUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import com.github.pagehelper.PageInfo;
 
@@ -14,6 +16,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+@Api(value = "用户接口", tags = {"用户接口"})
 @CrossOrigin //后端允许跨域
 @RestController
 @RequestMapping("/admin")
@@ -25,6 +28,7 @@ public class AdminController {
     //    登录
     @PostMapping("/login")
     @AutoLog("登录该系统")
+    @ApiOperation("登陆接口")
     public Result login(@RequestBody Admin admin, @RequestParam String key, HttpServletRequest request) {
         // 判断验证码对不对
         if (!admin.getVerCode().toLowerCase().equals(CaptureConfig.CAPTURE_MAP.get(key))) {
@@ -37,7 +41,7 @@ public class AdminController {
         return Result.success(loginUser);
     }
 
-    //    注册
+    // 注册
     @PostMapping("/register")
     public Result register(@RequestBody Admin admin) {
         adminService.add(admin);

@@ -1,8 +1,12 @@
 package com.example.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 
 @Table(name = "admin")
+@ApiModel("用户表")
 public class Admin {
 
     @Id
@@ -10,8 +14,10 @@ public class Admin {
     private Integer id;
 
     @Column(name = "name")
+    @ApiModelProperty("用户名")
     private String name;
     @Column(name = "password")
+    @ApiModelProperty("密码")
     private String password;
     @Column(name = "sex")
     private String sex;
