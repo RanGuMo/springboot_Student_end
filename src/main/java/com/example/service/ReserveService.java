@@ -5,6 +5,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.example.dao.AdminDao;
 import com.example.dao.HotelDao;
 import com.example.dao.ReserveDao;
+import com.example.dao.TypeDao;
 import com.example.entity.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -24,6 +25,8 @@ public class ReserveService {
     private HotelDao hotelDao;
     @Resource
     private AdminDao adminDao;
+
+
 
 
     public PageInfo<Reserve> findBySearch(Params params) {
