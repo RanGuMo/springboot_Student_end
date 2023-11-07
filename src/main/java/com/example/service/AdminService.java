@@ -86,8 +86,8 @@ public class AdminService {
             throw new CustomException("用户名或密码输入错误");
         }
         // 如果查出来了有，那说明确实有这个管理员，而且输入的用户名和密码都对；
-        // 生成jwt token给前端
-        String token = JwtTokenUtils.genToken(user.getId().toString(), user.getPassword());
+        // 生成jwt 给前端
+        String token = JwtTokenUtils.genToken(user.getId().toString(), user.getName());
         user.setToken(token);
         return user;
     }

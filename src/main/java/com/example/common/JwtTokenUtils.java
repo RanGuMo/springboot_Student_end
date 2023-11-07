@@ -27,7 +27,7 @@ public class JwtTokenUtils {
     private AdminService adminService;
 
     @PostConstruct
-    public void setUserService() {
+    public void setAdminService() {
         staticAdminService = adminService;
     }
 
@@ -59,7 +59,7 @@ public class JwtTokenUtils {
             String adminId = JWT.decode(token).getAudience().get(0);
             return staticAdminService.findById(Integer.valueOf(adminId));
         } catch (Exception e) {
-            log.error("获取当前登录的管理员信息失败, token={}", token,  e);
+            log.error("获取当前登录的用户信息失败, token={}", token,  e);
             return null;
         }
     }
