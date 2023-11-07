@@ -79,13 +79,13 @@ public class AdminService {
         if (admin.getPassword() == null || "".equals(admin.getPassword())) {
             throw new CustomException("密码不能为空");
         }
-        // 2. 从数据库里面根据这个用户名和密码去查询对应的管理员信息，
+        // 2. 从数据库里面根据这个用户名和密码去查询对应的用户信息，
         Admin user = adminDao.findByNameAndPassword(admin.getName(), admin.getPassword());
         if (user == null) {
             // 如果查出来没有，那说明输入的用户名或者密码有误，提示用户，不允许登录
             throw new CustomException("用户名或密码输入错误");
         }
-        // 如果查出来了有，那说明确实有这个管理员，而且输入的用户名和密码都对；
+        // 如果查出来了有，那说明确实有这个用户，而且输入的用户名和密码都对；
         // 生成jwt 给前端
         String token = JwtTokenUtils.genToken(user.getId().toString(), user.getName());
         user.setToken(token);
