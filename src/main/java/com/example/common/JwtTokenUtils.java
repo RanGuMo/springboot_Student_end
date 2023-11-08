@@ -57,6 +57,7 @@ public class JwtTokenUtils {
             }
             // 解析token，获取用户的id
             String adminId = JWT.decode(token).getAudience().get(0);
+            System.out.println(adminId);
             return staticAdminService.findById(Integer.valueOf(adminId));
         } catch (Exception e) {
             log.error("获取当前登录的用户信息失败, token={}", token,  e);
