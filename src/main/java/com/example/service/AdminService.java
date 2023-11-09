@@ -89,6 +89,7 @@ public class AdminService {
         // 生成jwt 给前端
         String token = JwtTokenUtils.genToken(user.getId().toString(), user.getName());
         user.setToken(token);
+        user.setPassword(null);//登陆密码设置为null
         return user;
     }
 
